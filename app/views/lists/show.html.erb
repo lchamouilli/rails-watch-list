@@ -1,24 +1,28 @@
 <br>
 <br>
-<div class="d-flex justify-content-around">
-  <% @list.movies.each do |movie| %>
-    <div class="card" style="width: 18rem;">
-      <%= image_tag("#{movie.poster_url}", class:"card-img-top")%>
-      <div class="card-body">
-        <h5 class="card-title"><%= movie.title %></h5>
-        <p class="card-text"><%= movie.overview %></p>
-        <p class="card-text"><%= movie.rating %></p>
-        <p class="card-text">
-          <ul>
-            <%movie.bookmarks.each do |bookmark|%>
-            <li><%= bookmark.comment%> <%= link_to "Delete", bookmark_path(bookmark), method: :delete, data: { confirm: "Are You sure ?" }%></li>
-            <%end%>
-          </ul>
-        </p>
+<div class="container">
+  <h1><%= @list.name %></h1>
+  <div class="d-flex justify-content-around">
+    <% @list.movies.each do |movie| %>
+      <div class="card" style="width: 18rem;">
+        <%= image_tag("#{movie.poster_url}", class:"card-img-top")%>
+        <div class="card-body">
+          <h5 class="card-title"><%= movie.title %></h5>
+          <p class="card-text"><%= movie.overview %></p>
+          <p class="card-text">Rate : <%= movie.rating %></p>
+          <p class="card-text">
+            <ul>
+              <%movie.bookmarks.each do |bookmark|%>
+              <li><%= bookmark.comment%> <%= link_to "Delete", bookmark_path(bookmark), method: :delete, data: { confirm: "Are You sure ?" }%></li>
+              <%end%>
+            </ul>
+          </p>
+        </div>
       </div>
-    </div>
-  <%end%>
+    <%end%>
+  </div>
 </div>
+
 
 
 <%= link_to "Add bookmark", new_list_bookmark_path(@list) %>
